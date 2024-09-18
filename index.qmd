@@ -1,11 +1,7 @@
 ---
-title: "Quarto Web Demo"
+title: "About Me"
 ---
 
-This is the main landing page!
-
-* To learn more about [geezers](https://www.thegeezer.com/).
-
-* To learn more about [Quarto websites](https://quarto.org/docs/websites).
+Hello! My name is Emma McLaughlin. I am a junior at Appalachian State University studying Mathematics with a concentration in Statistics. 
 
 

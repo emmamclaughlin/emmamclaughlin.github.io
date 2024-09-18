@@ -4,20 +4,62 @@
     "href": "project.html",
     "title": "Projects",
     "section": "",
-    "text": "Project 1\nProject 2\nProject 3\nProject 4"
+    "text": "Combining Data Frames\nProject 2\nProject 3\nProject 4"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About Me",
+    "title": "Involvement",
     "section": "",
-    "text": "This is where you get to write about yourself.\nIf your favorite color is purple you might show a graph that uses purple."
+    "text": "Club Involvement\nLead team for Presbyterian Episcopalian campus ministry. This club promotes community, service, and learning. As a member of the lead team I plan and run events and send monthly updates to churches that donate to our organization.\nScholarship Program\nPlemmons Scholars Program. Since my freshman year at App State I have been a part of the Plemmons Scholarship program which is a group of about ten people from each year at App state. We get together to discuss leadership, learn new skills at weekly meetings and hear from community members. Learn more here\nTravel Program\nUp With People Voices Program. During the Summer and Fall of 2023 I participated in a cultural exchange program where I traveled to four different countries in three months. During this program we put on a show promoting positive change, participated in service projects, and stayed with host families local to the community. Learn more here\nWork Experience\nYMCA Camp counselor. For the past two summers I have worked as a summer camp counselor at the YMCA. Here I led campers in group activities, such as field trips, crafts, and learning assignments.\nApp State Dining employee. As a student I work on campus at one of the campus dining location."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Quarto Web Demo",
+    "title": "About Me",
     "section": "",
-    "text": "This is the main landing page!\n\nTo learn more about geezers.\nTo learn more about Quarto websites."
+    "text": "Hello! My name is Emma McLaughlin. I am a junior at Appalachian State University studying Mathematics with a concentration in Statistics."
+  },
+  {
+    "objectID": "combining_data_frames.html#loading-packages",
+    "href": "combining_data_frames.html#loading-packages",
+    "title": "Combining Data Frames",
+    "section": "Loading packages",
+    "text": "Loading packages\n\n\nCode\nlibrary(tidyverse)\nlibrary(tidybiology)\n\ndata(happy)\ndata(happy_join_one)\ndata(happy_full)"
+  },
+  {
+    "objectID": "combining_data_frames.html#veiwing-the-data-sets",
+    "href": "combining_data_frames.html#veiwing-the-data-sets",
+    "title": "Combining Data Frames",
+    "section": "Veiwing the data sets",
+    "text": "Veiwing the data sets\n\n\nCode\nglimpse(happy)\n\n\nRows: 5\nColumns: 4\n$ country_name   &lt;chr&gt; \"Iraq\", \"Comoros\", \"Panama\", \"Maldives\", \"Spain\"\n$ ladder_score   &lt;dbl&gt; 4.854, 4.289, 6.180, 5.198, 6.491\n$ gdp            &lt;dbl&gt; 9.240, 8.031, 10.350, 9.826, 10.571\n$ social_support &lt;dbl&gt; 0.746, 0.626, 0.896, 0.913, 0.932\n\n\nCode\nglimpse(happy_join_one)\n\n\nRows: 5\nColumns: 2\n$ country_name            &lt;chr&gt; \"Iraq\", \"Comoros\", \"Panama\", \"Maldives\", \"Spai…\n$ healthy_life_expectancy &lt;dbl&gt; 60.583, 57.349, 69.652, 70.600, 74.700\n\n\nCode\nglimpse(happy_full)\n\n\nRows: 149\nColumns: 20\n$ country_name                              &lt;chr&gt; \"Finland\", \"Denmark\", \"Switz…\n$ region                                    &lt;chr&gt; \"Western Europe\", \"Western E…\n$ ladder_score                              &lt;dbl&gt; 7.842, 7.620, 7.571, 7.554, …\n$ standard_error_of_ladder_score            &lt;dbl&gt; 0.032, 0.035, 0.036, 0.059, …\n$ upperwhisker                              &lt;dbl&gt; 7.904, 7.687, 7.643, 7.670, …\n$ lowerwhisker                              &lt;dbl&gt; 7.780, 7.552, 7.500, 7.438, …\n$ logged_gdp_per_capita                     &lt;dbl&gt; 10.775, 10.933, 11.117, 10.8…\n$ social_support                            &lt;dbl&gt; 0.954, 0.954, 0.942, 0.983, …\n$ healthy_life_expectancy                   &lt;dbl&gt; 72.000, 72.700, 74.400, 73.0…\n$ freedom_to_make_life_choices              &lt;dbl&gt; 0.949, 0.946, 0.919, 0.955, …\n$ generosity                                &lt;dbl&gt; -0.098, 0.030, 0.025, 0.160,…\n$ perceptions_of_corruption                 &lt;dbl&gt; 0.186, 0.179, 0.292, 0.673, …\n$ ladder_score_in_dystopia                  &lt;dbl&gt; 2.43, 2.43, 2.43, 2.43, 2.43…\n$ explained_by_log_gdp_per_capita           &lt;dbl&gt; 1.446, 1.502, 1.566, 1.482, …\n$ explained_by_social_support               &lt;dbl&gt; 1.106, 1.108, 1.079, 1.172, …\n$ explained_by_healthy_life_expectancy      &lt;dbl&gt; 0.741, 0.763, 0.816, 0.772, …\n$ explained_by_freedom_to_make_life_choices &lt;dbl&gt; 0.691, 0.686, 0.653, 0.698, …\n$ explained_by_generosity                   &lt;dbl&gt; 0.124, 0.208, 0.204, 0.293, …\n$ explained_by_perceptions_of_corruption    &lt;dbl&gt; 0.481, 0.485, 0.413, 0.170, …\n$ dystopia_residual                         &lt;dbl&gt; 3.253, 2.868, 2.839, 2.967, …"
+  },
+  {
+    "objectID": "combining_data_frames.html#combining-happy-and-happy_join_one-by-row-and-column",
+    "href": "combining_data_frames.html#combining-happy-and-happy_join_one-by-row-and-column",
+    "title": "Combining Data Frames",
+    "section": "Combining happy and happy_join_one by row and column",
+    "text": "Combining happy and happy_join_one by row and column\n\n\nCode\nbind_rows(happy, happy_join_one)%&gt;% head(n=3) %&gt;% knitr::kable()\n\n\n\n\n\n\n\n\n\n\n\n\ncountry_name\nladder_score\ngdp\nsocial_support\nhealthy_life_expectancy\n\n\n\n\nIraq\n4.854\n9.240\n0.746\nNA\n\n\nComoros\n4.289\n8.031\n0.626\nNA\n\n\nPanama\n6.180\n10.350\n0.896\nNA\n\n\n\n\n\n\n\nCode\nnrow(happy)==nrow(happy_join_one)\n\n\n[1] TRUE\n\n\nCode\nbind_cols(happy,happy_join_one)%&gt;% head(n=3) %&gt;% knitr::kable()\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry_name…1\nladder_score\ngdp\nsocial_support\ncountry_name…5\nhealthy_life_expectancy\n\n\n\n\nIraq\n4.854\n9.240\n0.746\nIraq\n60.583\n\n\nComoros\n4.289\n8.031\n0.626\nComoros\n57.349\n\n\nPanama\n6.180\n10.350\n0.896\nPanama\n69.652"
+  },
+  {
+    "objectID": "combining_data_frames.html#alternative-to-previous-solution",
+    "href": "combining_data_frames.html#alternative-to-previous-solution",
+    "title": "Combining Data Frames",
+    "section": "Alternative to previous solution",
+    "text": "Alternative to previous solution\n\n\nCode\nhappy_join %&gt;% inner_join(happy_join_one)%&gt;% head(n=3) %&gt;% knitr::kable()\n\n\n\n\n\ncountry_name\nhealthy_life_expectancy\n\n\n\n\nIraq\n60.583\n\n\nComoros\n57.349\n\n\nPanama\n69.652"
+  },
+  {
+    "objectID": "combining_data_frames.html#filtering-out-countries-in-happy_full-that-are-also-in-happy",
+    "href": "combining_data_frames.html#filtering-out-countries-in-happy_full-that-are-also-in-happy",
+    "title": "Combining Data Frames",
+    "section": "Filtering out countries in happy_full that are also in happy",
+    "text": "Filtering out countries in happy_full that are also in happy\n\n\nCode\nhappy_full %&gt;% anti_join(happy) %&gt;% head(n=3) %&gt;% knitr::kable() \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry_name\nregion\nladder_score\nstandard_error_of_ladder_score\nupperwhisker\nlowerwhisker\nlogged_gdp_per_capita\nsocial_support\nhealthy_life_expectancy\nfreedom_to_make_life_choices\ngenerosity\nperceptions_of_corruption\nladder_score_in_dystopia\nexplained_by_log_gdp_per_capita\nexplained_by_social_support\nexplained_by_healthy_life_expectancy\nexplained_by_freedom_to_make_life_choices\nexplained_by_generosity\nexplained_by_perceptions_of_corruption\ndystopia_residual\n\n\n\n\nFinland\nWestern Europe\n7.842\n0.032\n7.904\n7.780\n10.775\n0.954\n72.0\n0.949\n-0.098\n0.186\n2.43\n1.446\n1.106\n0.741\n0.691\n0.124\n0.481\n3.253\n\n\nDenmark\nWestern Europe\n7.620\n0.035\n7.687\n7.552\n10.933\n0.954\n72.7\n0.946\n0.030\n0.179\n2.43\n1.502\n1.108\n0.763\n0.686\n0.208\n0.485\n2.868\n\n\nSwitzerland\nWestern Europe\n7.571\n0.036\n7.643\n7.500\n11.117\n0.942\n74.4\n0.919\n0.025\n0.292\n2.43\n1.566\n1.079\n0.816\n0.653\n0.204\n0.413\n2.839"
+  },
+  {
+    "objectID": "combining_data_frames.html",
+    "href": "combining_data_frames.html",
+    "title": "Combining Data Frames",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(tidybiology)\n\ndata(happy)\ndata(happy_join_one)\ndata(happy_full)"
   }
 ]

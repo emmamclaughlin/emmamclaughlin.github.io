@@ -1,0 +1,50 @@
+---
+title: "Combining Data Frames"
+format: revealjs
+code-fold: true
+editor: visual
+---
+
+## Loading packages
+
+```{r}
+#| echo: true
+library(tidyverse)
+library(tidybiology)
+
+data(happy)
+data(happy_join_one)
+data(happy_full)
+
+```
+## Veiwing the data sets
+
+```{r}
+#| echo: true
+glimpse(happy)
+glimpse(happy_join_one)
+glimpse(happy_full)
+
+```
+
+## Combining `happy` and `happy_join_one` by row and column
+```{r}
+#| echo: true
+bind_rows(happy, happy_join_one)%>% head(n=3) %>% knitr::kable()
+```
+
+```{r}
+#| echo: true
+nrow(happy)==nrow(happy_join_one)
+bind_cols(happy,happy_join_one)%>% head(n=3) %>% knitr::kable()
+```
+## Alternative to previous solution
+```{r}
+#| echo: true
+happy_join %>% inner_join(happy_join_one)%>% head(n=3) %>% knitr::kable()
+```
+## Filtering out countries in `happy_full` that are also in `happy`
+```{r}
+#| echo: true
+happy_full %>% anti_join(happy) %>% head(n=3) %>% knitr::kable() 
+```

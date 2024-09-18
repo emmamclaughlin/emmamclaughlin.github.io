@@ -2,7 +2,7 @@
 title: "Projects"
 ---
 
-* [Project 1]()
+* [Combining Data Frames](combining_data_frames.qmd)
 * [Project 2]()
 * [Project 3]()
 * [Project 4]()
