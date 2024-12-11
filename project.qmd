@@ -3,6 +3,6 @@ title: "Projects"
 ---
 
 * [Combining Data Frames](combining_data_frames.qmd)
-* [Project 2]()
+* [Final Visualization Project](STT2860_final.qmd)
 * [Project 3]()
 * [Project 4]()

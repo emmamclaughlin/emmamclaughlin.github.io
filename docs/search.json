@@ -1,5 +1,47 @@
 [
   {
+    "objectID": "STT2860_final.html",
+    "href": "STT2860_final.html",
+    "title": "EOG and EOC data for NC",
+    "section": "",
+    "text": "This data comes from the “2023-24 North Carolina School Assessments and Other Indicators Workbook”. This data set contained many different pages on test scores and indicators from elementary school to high school, but I chose to focus on EOC and EOG scores among NC schools. First I read in the data, specifically the sheet of data I needed.\n\nlibrary(readxl)\ntestdata_eocg &lt;- read_excel(\"Workbook5.xlsx\")\n\nThen I downloaded the packages I needed to visualiza the data.\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\nHere I changed the names of the columns and took out the first two rows of data because they were sub headers.\n\ntestdata_eocg &lt;- testdata_eocg %&gt;% \n  rename(\"District\"= \"Back to Introduction\",\n         \"School_Code\" = \"...2\",\n         \"School_Name\" = \"...3\",\n         \"Board_region\"= \"...4\",\n         \"Grade_span\" = \"...5\",\n         \"Subgroup\" = \"...6\",\n         \"Subject\" = \"...7\",\n         \"Not_Proficient\" = \"...8\",\n         \"Perc_Lev3\" = \"...9\",\n         \"Perc_Lev4\" = \"...10\",\n         \"Perc_Lev5\" = \"...11\",\n         \"Perc_ab3\" = \"...12\",\n         \"Perc_ab4\" = \"...13\")\n\n\ntestdata_eocg &lt;- testdata_eocg[-c(1,2), ]\n\nHere I made some of the factors numeric in order to simplify the visualization.\n\ntestdata_eocg$Perc_ab3 &lt;- as.numeric(testdata_eocg$Perc_ab3)\ntestdata_eocg$School_Code &lt;- as.numeric(testdata_eocg$School_Code)\ntestdata_eocg$Not_Proficient &lt;- as.numeric(testdata_eocg$Not_Proficient)\ntestdata_eocg$Perc_Lev3 &lt;- as.numeric(testdata_eocg$Perc_Lev3)\ntestdata_eocg$Perc_Lev4 &lt;- as.numeric(testdata_eocg$Perc_Lev4)"
+  },
+  {
+    "objectID": "STT2860_final.html#understanding-the-data",
+    "href": "STT2860_final.html#understanding-the-data",
+    "title": "EOG and EOC data for NC",
+    "section": "",
+    "text": "This data comes from the “2023-24 North Carolina School Assessments and Other Indicators Workbook”. This data set contained many different pages on test scores and indicators from elementary school to high school, but I chose to focus on EOC and EOG scores among NC schools. First I read in the data, specifically the sheet of data I needed.\n\nlibrary(readxl)\ntestdata_eocg &lt;- read_excel(\"Workbook5.xlsx\")\n\nThen I downloaded the packages I needed to visualiza the data.\n\nlibrary(ggplot2)\nlibrary(dplyr)\n\nHere I changed the names of the columns and took out the first two rows of data because they were sub headers.\n\ntestdata_eocg &lt;- testdata_eocg %&gt;% \n  rename(\"District\"= \"Back to Introduction\",\n         \"School_Code\" = \"...2\",\n         \"School_Name\" = \"...3\",\n         \"Board_region\"= \"...4\",\n         \"Grade_span\" = \"...5\",\n         \"Subgroup\" = \"...6\",\n         \"Subject\" = \"...7\",\n         \"Not_Proficient\" = \"...8\",\n         \"Perc_Lev3\" = \"...9\",\n         \"Perc_Lev4\" = \"...10\",\n         \"Perc_Lev5\" = \"...11\",\n         \"Perc_ab3\" = \"...12\",\n         \"Perc_ab4\" = \"...13\")\n\n\ntestdata_eocg &lt;- testdata_eocg[-c(1,2), ]\n\nHere I made some of the factors numeric in order to simplify the visualization.\n\ntestdata_eocg$Perc_ab3 &lt;- as.numeric(testdata_eocg$Perc_ab3)\ntestdata_eocg$School_Code &lt;- as.numeric(testdata_eocg$School_Code)\ntestdata_eocg$Not_Proficient &lt;- as.numeric(testdata_eocg$Not_Proficient)\ntestdata_eocg$Perc_Lev3 &lt;- as.numeric(testdata_eocg$Perc_Lev3)\ntestdata_eocg$Perc_Lev4 &lt;- as.numeric(testdata_eocg$Perc_Lev4)"
+  },
+  {
+    "objectID": "STT2860_final.html#graphs-of-test-score-by-school",
+    "href": "STT2860_final.html#graphs-of-test-score-by-school",
+    "title": "EOG and EOC data for NC",
+    "section": "Graphs of test score by school",
+    "text": "Graphs of test score by school\n\ntestdata_eocg %&gt;%\n  filter(!(School_Code == \"NC\")) %&gt;% \n  filter(Subgroup == \"All Students\", Subject == \"Reading Grade 3\") %&gt;% \n  ggplot(aes(Perc_ab3)) +\n  geom_bar(fill = \"lightblue\")  + \n  theme_bw() + \n  labs(x=\"Percent of students scoring above a 3\")\n\n\n\n\nThis graph shows the percentage of students that scored a 3 or higher on their Reading Grade 3 EOG\n\n\n\n\nBased on this graph, it looks like many schools have 50 % of students scoring above a 3 and most of the data is concentrated between 38%-63%.\n\ntestdata_eocg %&gt;% \n  filter(!(School_Code == \"NC\")) %&gt;% \n  filter(Subgroup == \"All Students\", Subject == \"Math Grade 3\")%&gt;%\n  ggplot(aes(Perc_ab3)) + \n  geom_bar(fill=\"lightpink\") + \n  theme_bw() + \n  labs(x=\"Percent of students scoring above a 3\")\n\n\n\n\nThis graph shows the percentage of students that scored a 3 or higher on their Math Grade 3 EOG\n\n\n\n\nThis graph shows most schools having 50% - 75% of their students scoring above a 3.\n\ntestdata_eocg %&gt;% \n  filter(!(School_Code == \"NC\")) %&gt;% \n  filter(Subgroup == \"All Students\", Subject == \"Math Grade 3\"| Subject == \"Reading Grade 3\") %&gt;% \n  ggplot(aes(Perc_ab3)) + geom_histogram(bins=100) +\n  facet_wrap(vars(Subject))+\n  theme_bw() + \n  labs(x=\"Percent of students scoring above a 3\")\n\n\n\n\nComparing percent of students scoring above a 3 in 3rd Grade Math and Reading\n\n\n\n\nThrough comparison we see that the test scores between subjects do not differ greatly, but percentages for Math tend to be a bit better.\n\ntestdata_eocg %&gt;% \n  filter(!(School_Code == \"NC\")) %&gt;% \n  filter(Subgroup == \"All Students\", Subject == \"Math Grade 5\"| Subject == \"Reading Grade 5\") %&gt;% \n  ggplot(aes(Perc_ab3)) + geom_histogram(bins=100) +\n  facet_wrap(vars(Subject))+\n  theme_bw() + \n  labs(x=\"Percent of students scoring above a 3\")\n\n\n\n\nComparing percent of students scoring above a 3 in 5th Grade Math and Reading\n\n\n\n\nThe graphs for 5th grade testing look very similar to the graphs from 3rd grade testing. There does not appear to be many differences.\n\ntestdata_eocg %&gt;% \n  filter(!(School_Code == \"NC\")) %&gt;% \n  filter(Subgroup == \"All Students\", Subject == \"Reading Grade 3\") %&gt;% \n  ggplot(aes(Perc_ab3, School_Name, color = Board_region)) + geom_point() +\n  theme(axis.text.y = element_blank()) + \n  labs(x = \"Percent of students scoring above a 3\", y= \"Schools\", color = \"Region\")\n\n\n\n\nSeeing if there is any relationship between region and proficiency on exams\n\n\n\n\nThere is not a clear pattern between the percent of students scoring above a 3 and the region where their school is.\n\ntestdata_eocg %&gt;% \n  filter(!(School_Code == \"NC\")) %&gt;% \n  filter(Subgroup == \"All Students\", Subject == \"Math Grade 3-8\") %&gt;% \n  ggplot(aes(Perc_Lev3, Perc_Lev4, color = Board_region)) + geom_point() + geom_jitter() + xlim(0,40) + labs(x=\"Percent Scoring 3\", y=\"Percent Scoring 4\", color = \"Region\")\n\n\n\n\nAttempting again to find relation between proficiency and region\n\n\n\n\nEven when Schools is no longer a variable there are no distinguishable patterns between test score and region."
+  },
+  {
+    "objectID": "STT2860_final.html#graphs-of-overall-nc-test-data",
+    "href": "STT2860_final.html#graphs-of-overall-nc-test-data",
+    "title": "EOG and EOC data for NC",
+    "section": "Graphs of overall NC test data",
+    "text": "Graphs of overall NC test data\n\ntestdata_eocg %&gt;% \n  filter(District == \"State of North Carolina\") %&gt;% \n  ggplot(aes(Not_Proficient, Subject)) +\n geom_boxplot(fill= \"purple\") + \n  labs(x=\"Percent of students not proficient in the subject\", y=\"Subject\") + \n  theme_bw()\n\n\n\n\nProficiency based on subject in NC\n\n\n\n\nThe Subject with the best proficiency appears to be Science . Reading and Math subjects appear to be similar to each other in terms of proficiency.\n\ntestdata_eocg %&gt;% \n  filter(!(District == \"State of North Carolina\")) %&gt;% \n  ggplot(aes(Not_Proficient)) + \n  geom_histogram() + \n  facet_wrap(vars(Subgroup)) +\n  theme_bw() +\n  labs(x=\"Percent of students not proficient\")\n\n\n\n\nProficiency by subgroups\n\n\n\n\nGroups like Homeless students, English Learners, and Disabled students appear to be less proficient in terms of testing. There also seems to be very little data on Migrant students, students in Foster Care, and Native students."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "About Me",
+    "section": "",
+    "text": "Hello! My name is Emma McLaughlin. I am a junior at Appalachian State University studying Mathematics with a concentration in Statistics."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Involvement",
+    "section": "",
+    "text": "Club Involvement\nLead team for Presbyterian Episcopalian campus ministry. This club promotes community, service, and learning. As a member of the lead team I plan and run events and send monthly updates to churches that donate to our organization.\nScholarship Program\nPlemmons Scholars Program. Since my freshman year at App State I have been a part of the Plemmons Scholarship program which is a group of about ten people from each year at App state. We get together to discuss leadership, learn new skills at weekly meetings and hear from community members. Learn more here\nTravel Program\nUp With People Voices Program. During the Summer and Fall of 2023 I participated in a cultural exchange program where I traveled to four different countries in three months. During this program we put on a show promoting positive change, participated in service projects, and stayed with host families local to the community. Learn more here.\nWork Experience\nYMCA Camp counselor. For the past two summers I have worked as a summer camp counselor at the YMCA. Here I led campers in group activities, such as field trips, crafts, and learning assignments.\nApp State Dining employee. As a student I work on campus at one of the campus dining location."
+  },
+  {
     "objectID": "combining_data_frames.html#loading-packages",
     "href": "combining_data_frames.html#loading-packages",
     "title": "Combining Data Frames",
@@ -35,24 +77,10 @@
     "text": "Filtering out countries in happy_full that are also in happy\n\n\nCode\nhappy_full %&gt;% anti_join(happy) %&gt;% head(n=3) %&gt;% knitr::kable() \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ncountry_name\nregion\nladder_score\nstandard_error_of_ladder_score\nupperwhisker\nlowerwhisker\nlogged_gdp_per_capita\nsocial_support\nhealthy_life_expectancy\nfreedom_to_make_life_choices\ngenerosity\nperceptions_of_corruption\nladder_score_in_dystopia\nexplained_by_log_gdp_per_capita\nexplained_by_social_support\nexplained_by_healthy_life_expectancy\nexplained_by_freedom_to_make_life_choices\nexplained_by_generosity\nexplained_by_perceptions_of_corruption\ndystopia_residual\n\n\n\n\nFinland\nWestern Europe\n7.842\n0.032\n7.904\n7.780\n10.775\n0.954\n72.0\n0.949\n-0.098\n0.186\n2.43\n1.446\n1.106\n0.741\n0.691\n0.124\n0.481\n3.253\n\n\nDenmark\nWestern Europe\n7.620\n0.035\n7.687\n7.552\n10.933\n0.954\n72.7\n0.946\n0.030\n0.179\n2.43\n1.502\n1.108\n0.763\n0.686\n0.208\n0.485\n2.868\n\n\nSwitzerland\nWestern Europe\n7.571\n0.036\n7.643\n7.500\n11.117\n0.942\n74.4\n0.919\n0.025\n0.292\n2.43\n1.566\n1.079\n0.816\n0.653\n0.204\n0.413\n2.839"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "About Me",
-    "section": "",
-    "text": "Hello! My name is Emma McLaughlin. I am a junior at Appalachian State University studying Mathematics with a concentration in Statistics."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Involvement",
-    "section": "",
-    "text": "Club Involvement\nLead team for Presbyterian Episcopalian campus ministry. This club promotes community, service, and learning. As a member of the lead team I plan and run events and send monthly updates to churches that donate to our organization.\nScholarship Program\nPlemmons Scholars Program. Since my freshman year at App State I have been a part of the Plemmons Scholarship program which is a group of about ten people from each year at App state. We get together to discuss leadership, learn new skills at weekly meetings and hear from community members. Learn more here\nTravel Program\nUp With People Voices Program. During the Summer and Fall of 2023 I participated in a cultural exchange program where I traveled to four different countries in three months. During this program we put on a show promoting positive change, participated in service projects, and stayed with host families local to the community. Learn more here.\nWork Experience\nYMCA Camp counselor. For the past two summers I have worked as a summer camp counselor at the YMCA. Here I led campers in group activities, such as field trips, crafts, and learning assignments.\nApp State Dining employee. As a student I work on campus at one of the campus dining location."
-  },
-  {
     "objectID": "project.html",
     "href": "project.html",
     "title": "Projects",
     "section": "",
-    "text": "Combining Data Frames\nProject 2\nProject 3\nProject 4"
+    "text": "Combining Data Frames\nFinal Visualization Project\nProject 3\nProject 4"
   }
 ]
